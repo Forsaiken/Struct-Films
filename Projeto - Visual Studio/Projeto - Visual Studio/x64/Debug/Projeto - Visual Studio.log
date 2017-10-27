@@ -1,6 +1,8 @@
 ﻿  main.c
-c:\users\forsa\onedrive\github\struct-films\main.c(84): warning C4047: '=': 'char *' differs in levels of indirection from 'char'
-c:\users\forsa\onedrive\github\struct-films\main.c(34): warning C4715: 'get_valid_int': not all control paths return a value
-c:\users\forsa\onedrive\github\struct-films\main.c(50): warning C4715: 'get_valid_string': not all control paths return a value
+c:\users\forsa\onedrive\github\struct-films\main.c(103): warning C4013: 'gets' undefined; assuming extern returning int
+c:\users\forsa\onedrive\github\struct-films\main.c(92): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'int *'
+c:\users\forsa\onedrive\github\struct-films\main.c(92): warning C4313: 'printf': '%d' in format string conflicts with argument 1 of type 'int *'
+c:\users\forsa\onedrive\github\struct-films\main.c(54): warning C4715: 'get_valid_int': not all control paths return a value
+c:\users\forsa\onedrive\github\struct-films\main.c(35): warning C4715: 'get_valid_float': not all control paths return a value
   Projeto - Visual Studio.vcxproj -> C:\Users\Forsa\OneDrive\GitHub\Struct-Films\Projeto - Visual Studio\x64\Debug\Projeto - Visual Studio.exe
   Projeto - Visual Studio.vcxproj -> C:\Users\Forsa\OneDrive\GitHub\Struct-Films\Projeto - Visual Studio\x64\Debug\Projeto - Visual Studio.pdb (Partial PDB)
