@@ -17,7 +17,7 @@ Trabalho de Algoritmo e Técnicas de Programação - B2
 
 7. Colocar o código-fonte da aplicação no trabalho impresso;
 
-
+________________________
 #### CRIAR CADASTRO ####
 ________________________
 
@@ -28,7 +28,7 @@ ________________________
 ✖  Transferir cadastro para arquivo de texto
 
 
-
+________________________
 #### VISUALIZAR CADASTRO ####
 ________________________
 
@@ -42,7 +42,7 @@ ________________________
 
 ✖    Pagina para visualizar lista de filmes por gênero
 
-
+________________________
 #### EDITAR CADASTRO ####
 ________________________
 
@@ -53,7 +53,7 @@ ________________________
 ✖    Transferir cadastro modificado para arquivo de texto
 
 
-
+________________________
 #### REMOVER CADASTRO ####
 ________________________
 
