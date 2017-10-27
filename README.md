@@ -2,19 +2,19 @@
 Trabalho de Algoritmo e Técnicas de Programação - B2
 
 
-1. Criar um sistema de Cadastro de Filmes;
+✖ Criar um sistema de Cadastro de Filmes;
 
-2. O sistema deve possuir um menu para Incluir, Excluir e Listar um filme
+✖ O sistema deve possuir um menu para Incluir, Excluir e Listar um filme
 
-3. Utilizar vetores com no máximo 200 filmes para efetuar o cadastro;
+☑ Utilizar vetores com no máximo 200 filmes para efetuar o cadastro;
 
-4. Utilizar struct para criar as entidades do sistema;
+☑ Utilizar struct para criar as entidades do sistema;
 
-5. Utilizar funções;
+☑ Utilizar funções;
 
-6. O sistema deve possuir um nome;
+☑ O sistema deve possuir um nome;
 
-7. Colocar o código-fonte da aplicação no trabalho impresso;
+✖ Colocar o código-fonte da aplicação no trabalho impresso;
 
 ________________________
 #### CRIAR CADASTRO ####
