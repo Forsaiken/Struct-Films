@@ -1,8 +1,16 @@
 ﻿  main.c
-c:\users\forsa\onedrive\github\struct-films\main.c(103): warning C4013: 'gets' undefined; assuming extern returning int
-c:\users\forsa\onedrive\github\struct-films\main.c(92): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'int *'
-c:\users\forsa\onedrive\github\struct-films\main.c(92): warning C4313: 'printf': '%d' in format string conflicts with argument 1 of type 'int *'
-c:\users\forsa\onedrive\github\struct-films\main.c(54): warning C4715: 'get_valid_int': not all control paths return a value
-c:\users\forsa\onedrive\github\struct-films\main.c(35): warning C4715: 'get_valid_float': not all control paths return a value
+c:\users\forsa\onedrive\github\struct-films\main.c(15): warning C4013: 'gets' undefined; assuming extern returning int
+c:\users\forsa\onedrive\github\struct-films\main.c(110): warning C4047: '=': 'FILE *' differs in levels of indirection from 'errno_t'
+c:\users\forsa\onedrive\github\struct-films\main.c(113): warning C4047: '=': 'FILE *' differs in levels of indirection from 'errno_t'
+c:\users\forsa\onedrive\github\struct-films\main.c(792): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(803): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(823): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(833): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(843): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(873): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(686): warning C4101: 'escolha': unreferenced local variable
+c:\users\forsa\onedrive\github\struct-films\main.c(86): warning C4715: 'get_valid_float': not all control paths return a value
+c:\users\forsa\onedrive\github\struct-films\main.c(105): warning C4715: 'get_valid_int': not all control paths return a value
+c:\users\forsa\onedrive\github\struct-films\main.c(476): warning C4715: 'show_films_list': not all control paths return a value
   Projeto - Visual Studio.vcxproj -> C:\Users\Forsa\OneDrive\GitHub\Struct-Films\Projeto - Visual Studio\x64\Debug\Projeto - Visual Studio.exe
   Projeto - Visual Studio.vcxproj -> C:\Users\Forsa\OneDrive\GitHub\Struct-Films\Projeto - Visual Studio\x64\Debug\Projeto - Visual Studio.pdb (Partial PDB)
