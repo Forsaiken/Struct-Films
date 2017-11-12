@@ -2,9 +2,9 @@
 Trabalho de Algoritmo e Técnicas de Programação - B2
 
 
-✖ Criar um sistema de Cadastro de Filmes;
+☑ Criar um sistema de Cadastro de Filmes;
 
-✖ O sistema deve possuir um menu para Incluir, Excluir e Listar um filme
+☑ O sistema deve possuir um menu para Incluir, Excluir e Listar um filme
 
 ☑ Utilizar vetores com no máximo 200 filmes para efetuar o cadastro;
 
@@ -31,23 +31,25 @@ ________________________
 #### VISUALIZAR CADASTRO ####
 ________________________
 
-✖    Menu para visualizar cadastros
+☑    Menu para visualizar cadastros
 
-✖    Pagina para visualizar todos os cadastros
+☑    Pagina para visualizar todos os cadastros
 
-✖    Pagina para visualizar todos os detalhes do filme
+☑    Pagina para visualizar todos os detalhes do filme
 
-✖    Pagina para visualizar lista de filmes por maior nota
+☑    Pagina para visualizar lista de filmes por nota
 
-✖    Pagina para visualizar lista de filmes por gênero
+☑    Pagina para visualizar lista de filmes por ano
+
+☑    Pagina para visualizar lista de filmes por gênero
 
 ________________________
 #### EDITAR CADASTRO ####
 ________________________
 
-✖    Menu para editar cadastro
+☑    Menu para editar cadastro
 
-✖    Pagina para editar cadastro por item
+☑    Pagina para editar cadastro por item
 
 ✖    Transferir cadastro modificado para arquivo de texto
 
@@ -56,8 +58,8 @@ ________________________
 #### REMOVER CADASTRO ####
 ________________________
 
-✖    Menu para remover cadastro
+☑    Menu para remover cadastro
 
-✖    Pagina para remover cadastro por código
+☑    Pagina para remover cadastro por código
 
 ✖    Transferir remoção de cadastro para arquivo de texto
