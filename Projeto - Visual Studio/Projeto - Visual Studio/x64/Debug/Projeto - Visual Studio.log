@@ -1,16 +1,18 @@
 ﻿  main.c
 c:\users\forsa\onedrive\github\struct-films\main.c(15): warning C4013: 'gets' undefined; assuming extern returning int
-c:\users\forsa\onedrive\github\struct-films\main.c(110): warning C4047: '=': 'FILE *' differs in levels of indirection from 'errno_t'
-c:\users\forsa\onedrive\github\struct-films\main.c(113): warning C4047: '=': 'FILE *' differs in levels of indirection from 'errno_t'
-c:\users\forsa\onedrive\github\struct-films\main.c(792): warning C4305: '=': truncation from 'double' to 'float'
-c:\users\forsa\onedrive\github\struct-films\main.c(803): warning C4305: '=': truncation from 'double' to 'float'
-c:\users\forsa\onedrive\github\struct-films\main.c(823): warning C4305: '=': truncation from 'double' to 'float'
-c:\users\forsa\onedrive\github\struct-films\main.c(833): warning C4305: '=': truncation from 'double' to 'float'
-c:\users\forsa\onedrive\github\struct-films\main.c(843): warning C4305: '=': truncation from 'double' to 'float'
-c:\users\forsa\onedrive\github\struct-films\main.c(873): warning C4305: '=': truncation from 'double' to 'float'
-c:\users\forsa\onedrive\github\struct-films\main.c(686): warning C4101: 'escolha': unreferenced local variable
-c:\users\forsa\onedrive\github\struct-films\main.c(86): warning C4715: 'get_valid_float': not all control paths return a value
-c:\users\forsa\onedrive\github\struct-films\main.c(105): warning C4715: 'get_valid_int': not all control paths return a value
-c:\users\forsa\onedrive\github\struct-films\main.c(476): warning C4715: 'show_films_list': not all control paths return a value
+c:\users\forsa\onedrive\github\struct-films\main.c(186): warning C4047: '=': 'FILE *' differs in levels of indirection from 'errno_t'
+c:\users\forsa\onedrive\github\struct-films\main.c(189): warning C4047: '=': 'FILE *' differs in levels of indirection from 'errno_t'
+c:\users\forsa\onedrive\github\struct-films\main.c(971): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(982): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(1002): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(1012): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(1022): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(1052): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(1062): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\forsa\onedrive\github\struct-films\main.c(826): warning C4101: 'result': unreferenced local variable
+c:\users\forsa\onedrive\github\struct-films\main.c(844): warning C4101: 'result': unreferenced local variable
+c:\users\forsa\onedrive\github\struct-films\main.c(865): warning C4101: 'result': unreferenced local variable
+c:\users\forsa\onedrive\github\struct-films\main.c(161): warning C4715: 'get_valid_float': not all control paths return a value
+c:\users\forsa\onedrive\github\struct-films\main.c(181): warning C4715: 'get_valid_int': not all control paths return a value
   Projeto - Visual Studio.vcxproj -> C:\Users\Forsa\OneDrive\GitHub\Struct-Films\Projeto - Visual Studio\x64\Debug\Projeto - Visual Studio.exe
   Projeto - Visual Studio.vcxproj -> C:\Users\Forsa\OneDrive\GitHub\Struct-Films\Projeto - Visual Studio\x64\Debug\Projeto - Visual Studio.pdb (Partial PDB)
