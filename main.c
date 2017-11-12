@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <locale.h>
-#include "main.h"
+#include <windows.h>
 
 #define _CRT_SECURE_NO_WARNINGS
 #define _CRT_NONSTDC_NO_DEPRECATE
@@ -19,7 +19,7 @@ void flush() {
 struct filme {
 
 	char	title[100];
-	int		genre[5];
+	int		genre[3];
 	char	producer[100];
 	int		year;
 	float	imdb;
@@ -39,6 +39,79 @@ int last_id() {
 	return last_id;
 }
 
+int min_year() {
+
+	int min_year = 2500;
+
+	for (int i = 0; i < 200; i++) {
+
+		if (cadastros[i].active == true && cadastros[i].year < min_year)
+			min_year = cadastros[i].year;
+
+	}
+
+	if (min_year == 2500)
+		return -1;
+	else
+		return min_year;
+}
+
+float min_imdb() {
+
+	float min_imdb = 10;
+
+	for (int i = 0; i < 200; i++) {
+
+		if (cadastros[i].active == true && cadastros[i].imdb < min_imdb)
+			min_imdb = cadastros[i].imdb;
+
+	}
+
+	return min_imdb;
+}
+
+int max_year() {
+
+	int max_year = 500;
+
+	for (int i = 0; i < 200; i++) {
+
+		if (cadastros[i].active == true && cadastros[i].year > max_year)
+			max_year = cadastros[i].year;
+
+	}
+
+	if (max_year == 500)
+		return -1;
+	else
+		return max_year;
+}
+
+float max_imdb() {
+
+	float max_imdb = 0;
+
+	for (int i = 0; i < 200; i++) {
+
+		if (cadastros[i].active == true && cadastros[i].imdb > max_imdb)
+			max_imdb = cadastros[i].imdb;
+
+	}
+
+	return max_imdb;
+}
+
+int total_films() {
+	int count = 0;
+
+	for (int i = 0; i < 200; i++) {
+		if (cadastros[i].active == true)
+			count += 1;
+	}
+
+	return count;
+}
+
 void sleep() {
 
 	printf("\n+-----------------------------------------------------------+\n");
@@ -50,9 +123,10 @@ void sleep() {
 void show_title() {
 
 	setlocale(LC_ALL, "Portuguese");
-	system("mode con:cols=60 lines=11");
+	system("mode con:cols=61 lines=11");
+	system("COLORS 70");
 	printf("+----------------------------------------------------------+\n");
-	printf("+                       STRUCT FILMES                      +\n");
+	printf("+                        STRUCT FILMS                      +\n");
 	printf("+----------------------------------------------------------+\n");
 	printf("+                                                          +\n");
 	printf("+    NOME: Vitor Mendes   RA: 8799001598  TURMA: SI - 2    +\n");
@@ -75,6 +149,7 @@ float get_valid_float(char *string, float min, float max) {
 
 		printf("%s", string);
 		scanf_s("%f", &escolha);
+		flush();
 
 		if (escolha < min || escolha > max)
 			printf("Opção Inválida. Escolha um valor entre %.1f e %.1f\n", min, max);
@@ -94,6 +169,7 @@ int get_valid_int(char *string, int min, int max) {
 
 		printf("%s", string);
 		scanf_s("%d", &escolha);
+		flush();
 
 		if (escolha < min || escolha > max)
 			printf("Opção Inválida. Escolha um valor entre %d e %d\n", min, max);
@@ -132,20 +208,22 @@ void get_gender(int id) {
 	printf("\nLista de Gêneros: \n\n");
 	printf("1 - Ação \n");
 	printf("2 - Adulto \n");
-	printf("3 - Aventura \n");
-	printf("4 - Comédia \n");
-	printf("5 - Criminal \n");
-	printf("6 - Documentario \n");
-	printf("7 - Drama \n");
-	printf("8 - Horror \n");
-	printf("9 - Mistério \n");
-	printf("10 - Musical \n");
-	printf("11 - Policial \n");
-	printf("12 - Romance \n");
-	printf("13 - Ficção \n");
-	printf("14 - Suspense \n");
-	printf("15 - Terror \n");
-	genre_array = get_valid_int("\nEm quantos gêneros esse filme se enquadra: ", 1, 5);
+	printf("3 - Animação \n");
+	printf("4 - Aventura \n");
+	printf("5 - Comédia \n");
+	printf("6 - Criminal \n");
+	printf("7 - Documentario \n");
+	printf("8 - Drama \n");
+	printf("9 - Fantasia \n");
+	printf("10 - Horror \n");
+	printf("11 - Mistério \n");
+	printf("12 - Musical \n");
+	printf("13 - Policial \n");
+	printf("14 - Romance \n");
+	printf("15 - Sci-fi \n");
+	printf("16 - Suspense \n");
+	printf("17 - Terror \n");
+	genre_array = get_valid_int("\nEm quantos gêneros esse filme se enquadra: ", 1, 3);
 	printf("\n");
 	for (int i = 0; i < genre_array; i++) {
 
@@ -155,11 +233,11 @@ void get_gender(int id) {
 
 			printf("Qual o código do gênero %d de %d: ", i + 1, genre_array);
 			scanf_s("%d", &escolha);
+			flush();
 
-			if (escolha < 1 || escolha > 15)
-				printf("Opção Inválida. Escolha um valor entre 1 e 15\n");
+			if (escolha < 1 || escolha > 17)
+				printf("Opção Inválida. Escolha um valor entre 1 e 17\n");
 			else {
-
 				cadastros[id].genre[i] = escolha;
 				valid = true;
 
@@ -167,7 +245,7 @@ void get_gender(int id) {
 		}
 	}
 
-	for (int g = genre_array; g < 5; g++) {
+	for (int g = genre_array; g <= 3; g++) {
 		cadastros[id].genre[g] = 0;
 	}
 }
@@ -176,26 +254,28 @@ void show_gender(int id) {
 
 	if (id >= 0) {
 
-		for (int i = 0; i <= 5; i++) {
+		for (int i = 0; i < 3; i++) {
 
 			switch (cadastros[id].genre[i]) {
 
-			case 0: { printf("\n");				return; }
-			case 1: { printf("[Ação]");			break;	}
+			case 0: { printf("\n");					return; }
+			case 1: { printf("[Ação]");				break;	}
 			case 2: { printf("[Adulto]");			break;	}
-			case 3: { printf("[Aventura]");		break;	}
-			case 4: { printf("[Comédia]");			break;	}
-			case 5: { printf("[Criminal]");		break;	}
-			case 6: { printf("[Documentario]");	break;	}
-			case 7: { printf("[Drama]");			break;	}
-			case 8: { printf("[Horror]");			break;	}
-			case 9: { printf("[Mistério]");		break;	}
-			case 10: { printf("[Musical]");			break;	}
-			case 11: { printf("[Policial]");		break;	}
-			case 12: { printf("[Romance]");			break;	}
-			case 13: { printf("[Ficção]");			break;	}
-			case 14: { printf("[Suspense]");		break;	}
-			case 15: { printf("[Terror]"); 			break;	}
+			case 3: { printf("[Animação]");			break;	}
+			case 4: { printf("[Aventura]");			break;	}
+			case 5: { printf("[Comédia]");			break;	}
+			case 6: { printf("[Criminal]");			break;	}
+			case 7: { printf("[Documentario]");		break;	}
+			case 8: { printf("[Drama]");			break;	}
+			case 9: { printf("[Fantasia]");			break;	}
+			case 10: { printf("[Horror]");			break;	}
+			case 11: { printf("[Mistério]");		break;	}
+			case 12: { printf("[Musical]");			break;	}
+			case 13: { printf("[Policial]");		break;	}
+			case 14: { printf("[Romance]");			break;	}
+			case 15: { printf("[Sci-fi]");			break;	}
+			case 16: { printf("[Suspense]");		break;	}
+			case 17: { printf("[Terror]"); 			break;	}
 			}
 
 			if (cadastros[id].genre[i + 1] != 0)
@@ -206,21 +286,23 @@ void show_gender(int id) {
 	else {
 
 		switch (id) {
-		case -1: { printf("[Ação]");			break;	}
-		case -2: { printf("[Adulto]");			break;	}
-		case -3: { printf("[Aventura]");		break;	}
-		case -4: { printf("[Comédia]");			break;	}
-		case -5: { printf("[Criminal]");		break;	}
-		case -6: { printf("[Documentario]");	break;	}
-		case -7: { printf("[Drama]");			break;	}
-		case -8: { printf("[Horror]");			break;	}
-		case -9: { printf("[Mistério]");		break;	}
-		case -10: { printf("[Musical]");			break;	}
-		case -11: { printf("[Policial]");		break;	}
-		case -12: { printf("[Romance]");			break;	}
-		case -13: { printf("[Ficção]");			break;	}
-		case -14: { printf("[Suspense]");		break;	}
-		case -15: { printf("[Terror]"); 			break;	}
+		case -1: { printf("[Ação]");				break;	}
+		case -2: { printf("[Adulto]");				break;	}
+		case -3: { printf("[Animação]");			break;	}
+		case -4: { printf("[Aventura]");			break;	}
+		case -5: { printf("[Comédia]");				break;	}
+		case -6: { printf("[Criminal]");			break;	}
+		case -7: { printf("[Documentario]");		break;	}
+		case -8: { printf("[Drama]");				break;	}
+		case -9: { printf("[Fantasia]");			break;	}
+		case -10: { printf("[Horror]");				break;	}
+		case -11: { printf("[Mistério]");			break;	}
+		case -12: { printf("[Musical]");			break;	}
+		case -13: { printf("[Policial]");			break;	}
+		case -14: { printf("[Romance]");			break;	}
+		case -15: { printf("[Sci-fi]");				break;	}
+		case -16: { printf("[Suspense]");			break;	}
+		case -17: { printf("[Terror]"); 			break;	}
 		}
 	}
 }
@@ -260,7 +342,6 @@ void edit_film(int id) {
 	}
 	case 1: {
 
-		flush();
 		printf("Titulo atual: %s\n", cadastros[id].title);
 		printf("Insira o novo titulo: ");
 		gets(cadastros[id].title);
@@ -272,7 +353,6 @@ void edit_film(int id) {
 	}
 	case 2: {
 
-		flush();
 		printf("Filme: [%03d] %s\n\n", id + 1, cadastros[id].title);
 		printf("Gênero atual: "); show_gender(id);
 		get_gender(id);
@@ -284,7 +364,6 @@ void edit_film(int id) {
 	}
 	case 3: {
 
-		flush();
 		printf("Filme: [%03d] %s\n\n", id + 1, cadastros[id].title);
 		printf("Diretor atual: %s\n", cadastros[id].producer);
 		printf("Insira o novo diretor: ");
@@ -297,7 +376,6 @@ void edit_film(int id) {
 	}
 	case 4: {
 
-		flush();
 		printf("Filme: [%03d] %s\n\n", id + 1, cadastros[id].title);
 		printf("Ano do filme atual: %d\n", cadastros[id].year);
 		char *ano = "Insira o novo Ano do filme: ";
@@ -310,14 +388,12 @@ void edit_film(int id) {
 	}
 	case 5: {
 
-		flush();
 		printf("Filme: [%03d] %s\n\n", id + 1, cadastros[id].title);
 		printf("Nota IMDB atual: %.1f\n", cadastros[id].imdb);
 		char *nota = "Nova nota IMDB: ";
 		cadastros[id].imdb = get_valid_float(nota, 0, 10);
 		printf("\nNota IMDB alterada com sucesso!\n");
 		sleep();
-		flush();
 		edit_film(id);
 		break;
 	}
@@ -369,7 +445,7 @@ void show_film_detail(int id) {
 	}
 }
 
-int show_films_list(int type) {
+void show_films_list(int type) {
 
 	int contador = 0;
 
@@ -381,7 +457,7 @@ int show_films_list(int type) {
 
 	if (type == 0) {
 
-		printf("Lista de filmes com código:\n\n");
+		printf("Lista de filmes por código:\n\n");
 
 		for (int i = 0; i < 200; i++) {
 
@@ -392,11 +468,8 @@ int show_films_list(int type) {
 
 		}
 
-		return contador;
-
-		// Por Genero
-
-	} else if (type == 1) {
+	}
+	else if (type == 1) {
 
 		char *string = "Insira o código do gênero (0 - Retornar): ";
 		int escolha, contador_genre = 0;
@@ -404,20 +477,22 @@ int show_films_list(int type) {
 		printf("Lista de Gêneros: \n\n");
 		printf("1 - Ação \n");
 		printf("2 - Adulto \n");
-		printf("3 - Aventura \n");
-		printf("4 - Comédia \n");
-		printf("5 - Criminal \n");
-		printf("6 - Documentario \n");
-		printf("7 - Drama \n");
-		printf("8 - Horror \n");
-		printf("9 - Mistério \n");
-		printf("10 - Musical \n");
-		printf("11 - Policial \n");
-		printf("12 - Romance \n");
-		printf("13 - Ficção \n");
-		printf("14 - Suspense \n");
-		printf("15 - Terror \n\n");
-		escolha = get_valid_int(string, 0, 15);
+		printf("3 - Animação \n");
+		printf("4 - Aventura \n");
+		printf("5 - Comédia \n");
+		printf("6 - Criminal \n");
+		printf("7 - Documentario \n");
+		printf("8 - Drama \n");
+		printf("9 - Fantasia \n");
+		printf("10 - Horror \n");
+		printf("11 - Mistério \n");
+		printf("12 - Musical \n");
+		printf("13 - Policial \n");
+		printf("14 - Romance \n");
+		printf("15 - Sci-fi \n");
+		printf("16 - Suspense \n");
+		printf("17 - Terror \n\n");
+		escolha = get_valid_int(string, 0, 17);
 
 		if (escolha != 0) {
 
@@ -432,7 +507,7 @@ int show_films_list(int type) {
 					if (cadastros[id].genre[id_genre] == 0) {
 						break;
 					}
-					else if (cadastros[id].genre[id_genre] == escolha) {
+					else if (cadastros[id].genre[id_genre] == escolha && cadastros[id].active == true) {
 						if (contador_genre == 0) {
 							printf("Lista de filmes com gênero "); show_gender(escolha - (escolha * 2)); printf(" :\n\n");
 						}
@@ -449,8 +524,150 @@ int show_films_list(int type) {
 				show_films_list(1);
 			}
 		} else { 
-			return 0;
+			return;
 		}
+	}
+	else if (type == 2) {
+
+		int range = last_id();
+		int actual_year = min_year();
+		int next_year;
+		int total = total_films();
+		int contador = 0;
+
+		if (total <= 0) {
+			printf("Não há cadastros ativos.\n");
+			sleep();
+			return;
+		}
+
+		while (contador < total) {
+
+			next_year = 2200;
+
+			for (int id = 0; id <= range; id++) {
+				if (cadastros[id].active == true && cadastros[id].year == actual_year) {
+					if (contador == 0)
+						printf("Lista de filmes por ano em ordem crescente: \n\n");
+					printf("[%d] [%03d] %s\n", cadastros[id].year, id + 1, cadastros[id].title);
+					contador += 1;
+				}
+				else if (cadastros[id].year > actual_year && cadastros[id].year < next_year && cadastros[id].active == true)
+					next_year = cadastros[id].year;
+			}
+
+			actual_year = next_year;
+		}
+	}
+	else if (type == 3) {
+
+		int range = last_id();
+		int actual_year = max_year();
+		int next_year;
+		int total = total_films();
+		int contador = 0;
+
+		if (total <= 0) {
+			printf("Não há cadastros ativos.\n");
+			sleep();
+			return;
+		}
+
+		while (contador < total) {
+
+			next_year = 500;
+
+			for (int id = 0; id <= range; id++) {
+				if (cadastros[id].active == true && cadastros[id].year == actual_year) {
+					if (contador == 0)
+						printf("Lista de filmes por ano em ordem decrescente: \n\n");
+					printf("[%d] [%03d] %s\n", cadastros[id].year, id + 1, cadastros[id].title);
+					contador += 1;
+				}
+				else if (cadastros[id].year < actual_year && cadastros[id].year > next_year && cadastros[id].active == true)
+					next_year = cadastros[id].year;
+			}
+
+			actual_year = next_year;
+		}
+	}
+	else if (type == 4) {
+
+		int range = last_id();
+		float actual_imdb = min_imdb();
+		float next_imdb;
+		int total = total_films();
+		int contador = 0;
+
+		if (total <= 0) {
+			printf("Não há cadastros ativos.\n");
+			sleep();
+			return;
+		}
+
+		while (contador < total) {
+
+			next_imdb = 11;
+
+			for (int id = 0; id <= range; id++) {
+				if (cadastros[id].active == true && cadastros[id].imdb == actual_imdb) {
+					if (contador == 0)
+						printf("Lista de filmes por ano em ordem crescente: \n\n");
+					printf("[%.1f] [%03d] %s\n", cadastros[id].imdb, id + 1, cadastros[id].title);
+					contador += 1;
+				}
+				else if (cadastros[id].imdb > actual_imdb && cadastros[id].imdb < next_imdb && cadastros[id].active == true)
+					next_imdb = cadastros[id].imdb;
+			}
+
+			actual_imdb = next_imdb;
+		}
+	}
+	else if (type == 5) {
+
+		int range = last_id();
+		float actual_imdb = max_imdb();
+		float next_imdb;
+		int total = total_films();
+		int contador = 0;
+
+		if (total <= 0) {
+			printf("Não há cadastros ativos.\n");
+			sleep();
+			return;
+		}
+
+		while (contador < total) {
+
+			next_imdb = -1;
+
+			for (int id = 0; id <= range; id++) {
+				if (cadastros[id].active == true && cadastros[id].imdb == actual_imdb) {
+					if (contador == 0)
+						printf("Lista de filmes por ano em ordem crescente: \n\n");
+					printf("[%.1f] [%03d] %s\n", cadastros[id].imdb, id + 1, cadastros[id].title);
+					contador += 1;
+				}
+				else if (cadastros[id].imdb < actual_imdb && cadastros[id].imdb > next_imdb && cadastros[id].active == true)
+					next_imdb = cadastros[id].imdb;
+			}
+
+			actual_imdb = next_imdb;
+		}
+	}
+	else if (type == 6) {
+
+		printf("Lista de filmes por código:\n\n");
+
+		for (int i = 199; i >= 0; i--) {
+
+			if (cadastros[i].active == true) {
+				contador += 1;
+				printf("[%03d] %s \n", i + 1, cadastros[i].title);
+			}
+
+		}
+
 	}
 
 	int select;
@@ -459,17 +676,19 @@ int show_films_list(int type) {
 
 	printf("\nInsira o código do filme (0 - retornar): ");
 	scanf_s("%d", &select);
+	flush();
 
-	if (select < 0 || cadastros[select - 1].active != true) {
+	if (select == 0)
+		return;
+	else if (select < 0 || cadastros[select - 1].active != true) {
 		printf("\nCódigo inválido!\n");
 		sleep();
 		goto try_select_film;
-	} else if (select == 0) { show_films_list(1);
 	} else {
 
 		sleep();
 		show_film_detail(select - 1);
-		show_films_list(1);
+		show_films_list(type);
 
 	}
 
@@ -479,7 +698,13 @@ int main() {
 
 	show_title();
 
-	system("mode con:cols=61 lines=30");
+	// system("mode con:cols=61 lines=30");
+
+	HANDLE OUTPUT = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD BUFFER_SIZE = { 61, 210 };
+	SetConsoleScreenBufferSize(OUTPUT, BUFFER_SIZE);
+	SMALL_RECT QUADRADO = { 0, 0, 60, 30 };
+	SetConsoleWindowInfo(OUTPUT, TRUE, &QUADRADO);
 
 	verify_database();
 
@@ -491,14 +716,13 @@ int main() {
 	printf("+-----------------------------------------------------------+\n");
 	printf("+                         STRUCT FILMS                      +\n");
 	printf("+                        MENU PRINCIPAL                     +\n");
-	printf("+-----------------------------------------------------------+\n");
+	printf("+-----------------------------------------------------------+\n\n");
 	printf("Escolha uma das opções abaixo: \n\n");
 	printf("1 - Cadastro de filme \n");
 	printf("2 - Visualizar filme \n");
-	printf("3 - Modificar filme \n");
-	printf("4 - Remover filme \n");
-	printf("5 - Sair \n\n");
-	int escolha = get_valid_int(string, 1, 6);
+	printf("3 - Remover filme \n\n");
+	printf("0 - Sair \n\n");
+	int escolha = get_valid_int(string, 0, 4);
 
 	switch (escolha) {  
 
@@ -522,12 +746,10 @@ int main() {
 		printf("+                         STRUCT FILMS                      +\n");
 		printf("+                           CADASTRO                        +\n");
 		printf("+-----------------------------------------------------------+\n");
-		flush();
 
 		printf("\nTitulo: ");
 		gets(cadastros[id].title);
 		get_gender(id);
-		flush();
 		printf("\nDiretor: ");
 		gets(cadastros[id].producer);
 		char *ano = "Ano: ";
@@ -535,7 +757,6 @@ int main() {
 		char *nota = "Nota IMDB: ";
 		cadastros[id].imdb = get_valid_float(nota, 0, 10);
 		cadastros[id].active = true;
-		flush();
 
 		printf("\nCadastro realizado com sucesso!");
 		sleep();
@@ -559,7 +780,6 @@ int main() {
 			printf("2 - Buscar filme por nome \n\n");
 			printf("0 - Voltar \n\n");
 			int escolha = get_valid_int(string, 0, 2);
-			flush();
 
 			switch (escolha) {
 
@@ -579,54 +799,74 @@ int main() {
 					printf("4 - Visualizar lista de filmes por ordem de nota \n\n");
 					printf("0 - Voltar \n\n");
 					escolha = get_valid_int(string, 0, 4);
-					flush();
 
 					switch (escolha) {
 
-					case 0: { goto search_choice; break; }
+						case 0: { goto search_choice; break; }
 						case 1: { 
 
-							code_order:
+							system("CLS");
+							printf("+-----------------------------------------------------------+\n");
+							printf("+                         STRUCT FILMS                      +\n");
+							printf("+                          VISUALIZAR                       +\n");
+							printf("+-----------------------------------------------------------+\n\n");
+							printf("Escolha uma das opções abaixo: \n\n");
+							printf("1 - Ordem crescente \n");
+							printf("2 - Ordem decrescente \n\n");
+							printf("0 - Voltar \n\n");
+							escolha = get_valid_int(string, 0, 2);
 
-							if (show_films_list(1) < 1) {
-
-								printf("Não há filmes na lista.\n\n");
-								sleep();
-								goto list_choice;
-								break;
-
-							} else {
-
-								int id;
-
-								printf("Insira o código do filme para visualizar (0 - Retornar):");
-								scanf_s("%d", &id);
-								id -= 1;
-
-								if (id < 0 || cadastros[id].active != true) {
-									printf("Código inválido ou inexistente");
-									sleep();
-									goto code_order;
-								}
-								else {
-
-									sleep();
-									show_film_detail(id);
-
-								}
-						}
+							if (escolha == 2) { show_films_list(6); }
+							else if (escolha == 1) { show_films_list(0); }
+							goto list_choice;
 							break;
+
 						}
 						case 2: {
 							int result;
-							result = show_films_list(1);
-							if (result == 0)
-								goto list_choice;
-						}
-						case 3: {
+							show_films_list(1);
+							goto list_choice;
 							break;
 						}
+						case 3: {
+
+							system("CLS");
+							printf("+-----------------------------------------------------------+\n");
+							printf("+                         STRUCT FILMS                      +\n");
+							printf("+                          VISUALIZAR                       +\n");
+							printf("+-----------------------------------------------------------+\n\n");
+							printf("Escolha uma das opções abaixo: \n\n");
+							printf("1 - Ordem crescente \n");
+							printf("2 - Ordem decrescente \n\n");
+							printf("0 - Voltar \n\n");
+							escolha = get_valid_int(string, 0, 2);
+
+							int result;
+
+							if (escolha == 2) { show_films_list(3); }
+							else if (escolha == 1) { show_films_list(2); }
+							goto list_choice;
+							break;
+
+						}
 						case 4: {
+
+							system("CLS");
+							printf("+-----------------------------------------------------------+\n");
+							printf("+                         STRUCT FILMS                      +\n");
+							printf("+                          VISUALIZAR                       +\n");
+							printf("+-----------------------------------------------------------+\n\n");
+							printf("Escolha uma das opções abaixo: \n\n");
+							printf("1 - Ordem crescente \n");
+							printf("2 - Ordem decrescente \n\n");
+							printf("0 - Voltar \n\n");
+							escolha = get_valid_int(string, 0, 2);
+
+							int result;
+
+							if (escolha == 2) { show_films_list(5); }
+							else if (escolha == 1) { show_films_list(4); }
+							goto list_choice;
 							break;
 						}
 
@@ -683,80 +923,19 @@ int main() {
 
 		case 3: {
 
-			int id, escolha;
-
-			try_editar:
-
-			system("CLS");
-			printf("+-----------------------------------------------------------+\n");
-			printf("+                         STRUCT FILMS                      +\n");
-			printf("+                            EDITAR                         +\n");
-			printf("+-----------------------------------------------------------+\n");
-			
-			if (show_films_list(0) < 1) {
-
-				printf("Não há filmes na lista.\n\n");
-				sleep();
-				goto main_menu;
-				break;
-
-			}
-
-			printf("\nQual o código do filme que deseja editar (0 - Voltar): ");
-			scanf_s("%d", &id);
-			id -= 1;
-
-			system("CLS");
-			printf("+-----------------------------------------------------------+\n");
-			printf("+                         STRUCT FILMS                      +\n");
-			printf("+                            EDITAR                         +\n");
-			printf("+-----------------------------------------------------------+\n");
-
-			if (id < 0) {
-
-				goto main_menu;
-				break;
-
-			} else if (cadastros[id].active == true) {
-				
-				edit_film(id);
-				sleep();
-				goto try_editar;
-
-					
-			} else {
-
-				printf("\nEsse item não consta na lista.");
-				sleep();
-				goto try_editar;
-
-			}
-
-		}
-
-		case 4: {
-
 			int escolha;
 
 			try_excluir:
 			
 			system("CLS");
-			printf("+----------------------------------------------------------+\n");
-			printf("+                        STRUCT FILMS                      +\n");
-			printf("+                          EXCLUIR                         +\n");
-			printf("+----------------------------------------------------------+\n\n");
-
-			if (show_films_list(0) < 1) {
-
-				printf("Não há filmes na lista.\n\n");
-				sleep();
-				goto main_menu;
-				break;
-
-			}
-			
+			printf("+-----------------------------------------------------------+\n");
+			printf("+                         STRUCT FILMS                      +\n");
+			printf("+                           EXCLUIR                         +\n");
+			printf("+-----------------------------------------------------------+\n\n");
+		
 			printf("\nQual o código do filme que deseja deletar (0 - Voltar): ");
 			scanf_s("%d", &escolha);
+			flush();
 
 			if (escolha == 0) {
 				goto main_menu;
@@ -774,20 +953,20 @@ int main() {
 
 		}
 
-		case 5: {
+		case 0: {
 
 			return 0;
 
 		}
 
-		case 6: {
+		case 4: {
 
 			int id;
 			
 			id = last_id() + 1;
 
 			strcpy_s(cadastros[id].title, sizeof(cadastros[id].producer), "A menina que roubava livros");
-			cadastros[id].genre[0] = 7;
+			cadastros[id].genre[0] = 8;
 			strcpy_s(cadastros[id].producer,sizeof(cadastros[id].producer), "-");
 			cadastros[id].imdb = 7.9;
 			cadastros[id].year = 2013;
@@ -796,9 +975,9 @@ int main() {
 			id = last_id() + 1;
 
 			strcpy_s(cadastros[id].title, sizeof(cadastros[id].producer), "Blade Runner 2049");
-			cadastros[id].genre[0] = 1;
-			cadastros[id].genre[1] = 3;
-			cadastros[id].genre[2] = 13;
+			cadastros[id].genre[0] = 11;
+			cadastros[id].genre[1] = 15;
+			cadastros[id].genre[2] = 16;
 			strcpy_s(cadastros[id].producer, sizeof(cadastros[id].producer), "-");
 			cadastros[id].imdb = 8.1;
 			cadastros[id].year = 2017;
@@ -807,7 +986,7 @@ int main() {
 			id = last_id() + 1;
 
 			strcpy_s(cadastros[id].title, sizeof(cadastros[id].producer), "Harry Potter e a Pedra Filosofal");
-			cadastros[id].genre[0] = 3;
+			cadastros[id].genre[0] = 4;
 			cadastros[id].genre[1] = 9;
 			strcpy_s(cadastros[id].producer, sizeof(cadastros[id].producer), "Chris Columbus");
 			cadastros[id].imdb = 7.5;
@@ -817,7 +996,7 @@ int main() {
 			id = last_id() + 1;
 
 			strcpy_s(cadastros[id].title, sizeof(cadastros[id].producer), "Harry Potter e a Câmara Secreta");
-			cadastros[id].genre[0] = 3;
+			cadastros[id].genre[0] = 4;
 			cadastros[id].genre[1] = 9;
 			strcpy_s(cadastros[id].producer, sizeof(cadastros[id].producer), "Chris Columbus");
 			cadastros[id].imdb = 7.4;
@@ -827,7 +1006,7 @@ int main() {
 			id = last_id() + 1;
 
 			strcpy_s(cadastros[id].title, sizeof(cadastros[id].producer), "Harry Potter e o Prisioneiro de Azkaban");
-			cadastros[id].genre[0] = 3;
+			cadastros[id].genre[0] = 4;
 			cadastros[id].genre[1] = 9;
 			strcpy_s(cadastros[id].producer, sizeof(cadastros[id].producer), "Alfonso Cuarón");
 			cadastros[id].imdb = 7.8;
@@ -837,7 +1016,7 @@ int main() {
 			id = last_id() + 1;
 
 			strcpy_s(cadastros[id].title, sizeof(cadastros[id].producer), "Harry Potter e o Calice de Fogo");
-			cadastros[id].genre[0] = 3;
+			cadastros[id].genre[0] = 4;
 			cadastros[id].genre[1] = 9;
 			strcpy_s(cadastros[id].producer, sizeof(cadastros[id].producer), "Mike Newell");
 			cadastros[id].imdb = 7.7;
@@ -847,7 +1026,7 @@ int main() {
 			id = last_id() + 1;
 
 			strcpy_s(cadastros[id].title, sizeof(cadastros[id].producer), "Harry Potter e a Ordem da Fênix");
-			cadastros[id].genre[0] = 3;
+			cadastros[id].genre[0] = 4;
 			cadastros[id].genre[1] = 9;
 			strcpy_s(cadastros[id].producer, sizeof(cadastros[id].producer), "David Yates");
 			cadastros[id].imdb = 7.5;
@@ -857,7 +1036,7 @@ int main() {
 			id = last_id() + 1;
 
 			strcpy_s(cadastros[id].title, sizeof(cadastros[id].producer), "Harry Potter e o Enigma do Principe");
-			cadastros[id].genre[0] = 3;
+			cadastros[id].genre[0] = 4;
 			cadastros[id].genre[1] = 9;
 			strcpy_s(cadastros[id].producer, sizeof(cadastros[id].producer), "David Yates");
 			cadastros[id].imdb = 7.5;
@@ -867,7 +1046,7 @@ int main() {
 			id = last_id() + 1;
 
 			strcpy_s(cadastros[id].title, sizeof(cadastros[id].producer), "Harry Potter e as Reliquias da Morte (Parte I)");
-			cadastros[id].genre[0] = 3;
+			cadastros[id].genre[0] = 4;
 			cadastros[id].genre[1] = 9;
 			strcpy_s(cadastros[id].producer, sizeof(cadastros[id].producer), "David Yates");
 			cadastros[id].imdb = 7.7;
@@ -877,10 +1056,10 @@ int main() {
 			id = last_id() + 1;
 
 			strcpy_s(cadastros[id].title, sizeof(cadastros[id].producer), "Harry Potter e as Reliquias da Morte (Parte II)");
-			cadastros[id].genre[0] = 3;
+			cadastros[id].genre[0] = 4;
 			cadastros[id].genre[1] = 9;
 			strcpy_s(cadastros[id].producer, sizeof(cadastros[id].producer), "David Yates");
-			cadastros[id].imdb = 8,1;
+			cadastros[id].imdb = 8.1;
 			cadastros[id].year = 2011;
 			cadastros[id].active = true;
 
