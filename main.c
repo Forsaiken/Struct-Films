@@ -445,6 +445,14 @@ void show_film_detail(int id) {
 	}
 }
 
+bool have_films() {
+	int total = total_films();
+
+	if (total <= 0)
+		return false;
+	return true;
+}
+
 void show_films_list(int type) {
 
 	int contador = 0;
@@ -455,7 +463,9 @@ void show_films_list(int type) {
 	printf("+                          VISUALIZAR                       +\n");
 	printf("+-----------------------------------------------------------+\n\n");
 
-	if (type == 0) {
+	if (have_films() == false) { printf("Não há cadastros ativos.\n"); sleep();	return; }
+
+	if		(type == 0) {
 
 		printf("Lista de filmes por código:\n\n");
 
@@ -521,8 +531,10 @@ void show_films_list(int type) {
 			if (contador_genre == 0) {
 				printf("Não há itens nesse gênero\n");
 				sleep();
-				show_films_list(1);
+				show_films_list(type);
+				return;
 			}
+
 		} else { 
 			return;
 		}
@@ -534,12 +546,6 @@ void show_films_list(int type) {
 		int next_year;
 		int total = total_films();
 		int contador = 0;
-
-		if (total <= 0) {
-			printf("Não há cadastros ativos.\n");
-			sleep();
-			return;
-		}
 
 		while (contador < total) {
 
@@ -565,13 +571,7 @@ void show_films_list(int type) {
 		int actual_year = max_year();
 		int next_year;
 		int total = total_films();
-		int contador = 0;
-
-		if (total <= 0) {
-			printf("Não há cadastros ativos.\n");
-			sleep();
-			return;
-		}
+		int contador = 0;		
 
 		while (contador < total) {
 
@@ -599,12 +599,6 @@ void show_films_list(int type) {
 		int total = total_films();
 		int contador = 0;
 
-		if (total <= 0) {
-			printf("Não há cadastros ativos.\n");
-			sleep();
-			return;
-		}
-
 		while (contador < total) {
 
 			next_imdb = 11;
@@ -630,12 +624,6 @@ void show_films_list(int type) {
 		float next_imdb;
 		int total = total_films();
 		int contador = 0;
-
-		if (total <= 0) {
-			printf("Não há cadastros ativos.\n");
-			sleep();
-			return;
-		}
 
 		while (contador < total) {
 
@@ -682,7 +670,6 @@ void show_films_list(int type) {
 		return;
 	else if (select < 0 || cadastros[select - 1].active != true) {
 		printf("\nCódigo inválido!\n");
-		sleep();
 		goto try_select_film;
 	} else {
 
@@ -718,11 +705,10 @@ int main() {
 	printf("+                        MENU PRINCIPAL                     +\n");
 	printf("+-----------------------------------------------------------+\n\n");
 	printf("Escolha uma das opções abaixo: \n\n");
-	printf("1 - Cadastro de filme \n");
-	printf("2 - Visualizar filme \n");
-	printf("3 - Remover filme \n\n");
+	printf("1 - Incluir filme \n");
+	printf("2 - Buscar filme \n\n");
 	printf("0 - Sair \n\n");
-	int escolha = get_valid_int(string, 0, 4);
+	int escolha = get_valid_int(string, 0, 3);
 
 	switch (escolha) {  
 
@@ -775,11 +761,13 @@ int main() {
 			printf("+                         STRUCT FILMS                      +\n");
 			printf("+                          VISUALIZAR                       +\n");
 			printf("+-----------------------------------------------------------+\n\n");
+			if (have_films() == false) { printf("Não há cadastros ativos.\n"); sleep();	goto main_menu; }
 			printf("Escolha uma das opções abaixo: \n\n");
 			printf("1 - Buscar filme por lista \n");
-			printf("2 - Buscar filme por nome \n\n");
+			printf("2 - Buscar filme por titulo \n");
+			printf("3 - Buscar filme por diretor \n\n");
 			printf("0 - Voltar \n\n");
-			int escolha = get_valid_int(string, 0, 2);
+			int escolha = get_valid_int(string, 0, 3);
 
 			switch (escolha) {
 
@@ -792,6 +780,7 @@ int main() {
 					printf("+                         STRUCT FILMS                      +\n");
 					printf("+                          VISUALIZAR                       +\n");
 					printf("+-----------------------------------------------------------+\n\n");
+					if (have_films() == false) { printf("Não há cadastros ativos.\n"); sleep();	goto main_menu; }
 					printf("Escolha uma das opções abaixo: \n\n");
 					printf("1 - Visualizar lista de filmes por ordem de código \n");
 					printf("2 - Visualizar lista de filmes por gênero \n");
@@ -871,7 +860,6 @@ int main() {
 						}
 
 					}
-
 				}
 
 				case 2: {
@@ -879,13 +867,12 @@ int main() {
 					char title[100];
 					int id = -1;
 
-					// char *title;
-
 					system("CLS");
 					printf("+-----------------------------------------------------------+\n");
 					printf("+                         STRUCT FILMS                      +\n");
 					printf("+                          VISUALIZAR                       +\n");
 					printf("+-----------------------------------------------------------+\n\n");
+					if (have_films() == false) { printf("Não há cadastros ativos.\n"); sleep();	goto main_menu; }
 					printf("Insira o nome do filme: ");
 					gets(title);
 
@@ -894,9 +881,7 @@ int main() {
 						if (_stricmp(title, cadastros[i].title) == 0) {
 							id = i;
 							i = 200;
-
 						}
-
 					}
 
 					if (id > -1 && cadastros[id].active == true) {
@@ -916,41 +901,66 @@ int main() {
 					goto search_choice;
 
 				}
+				case 3: {
+
+					char title[100];
+					int id = -1;
+
+					try_producer:
+
+					system("CLS");
+					printf("+-----------------------------------------------------------+\n");
+					printf("+                         STRUCT FILMS                      +\n");
+					printf("+                          VISUALIZAR                       +\n");
+					printf("+-----------------------------------------------------------+\n\n");
+					if (have_films() == false) { printf("Não há cadastros ativos.\n"); sleep();	goto main_menu; }
+					printf("Insira o nome do diretor: ");
+					gets(title);
+
+					int contador = 0;
+
+					system("CLS");
+					printf("+-----------------------------------------------------------+\n");
+					printf("+                         STRUCT FILMS                      +\n");
+					printf("+                          VISUALIZAR                       +\n");
+					printf("+-----------------------------------------------------------+\n\n");
+
+					for (int id = 0; id < 200; id++) {
+
+						if (_stricmp(title, cadastros[id].producer) == 0 && cadastros[id].active == true) {
+							if (contador == 0)
+								printf("\nLista de filmes com o diretor [%s]:\n\n", cadastros[id].producer);
+							printf("[%03d] %s\n", id + 1, cadastros[id].title);
+							contador += 1;
+						}
+					}
+
+					if (contador == 0) { printf("Não existe registros com o nome desse diretor\n");
+					sleep();
+					goto search_choice;
+
+					}
+
+						try_film:
+
+						printf("\nInsira o código do filme (0 - Voltar): ");
+						scanf_s("%d", &escolha);
+
+						if (escolha == 0)
+							goto search_choice;
+						else if (cadastros[escolha - 1].active == true)  {
+							sleep();
+							show_film_detail(escolha - 1);	
+							goto search_choice;
+
+						} else {
+							printf("Código inválido ou inexistente! Tente novamente.\n");
+							sleep();
+							goto try_film;
+						}
+				}
 
 			}
-
-		}
-
-		case 3: {
-
-			int escolha;
-
-			try_excluir:
-			
-			system("CLS");
-			printf("+-----------------------------------------------------------+\n");
-			printf("+                         STRUCT FILMS                      +\n");
-			printf("+                           EXCLUIR                         +\n");
-			printf("+-----------------------------------------------------------+\n\n");
-		
-			printf("\nQual o código do filme que deseja deletar (0 - Voltar): ");
-			scanf_s("%d", &escolha);
-			flush();
-
-			if (escolha == 0) {
-				goto main_menu;
-				break;
-			} else if (cadastros[escolha - 1].active == true) {
-				cadastros[escolha - 1].active = false;
-				printf("\nO filme foi excluido com sucesso.");
-				sleep();
-				goto try_excluir;
-			} else {
-				printf("\nEsse item não consta na lista.");
-				sleep();
-				goto try_excluir;
-			}
-
 		}
 
 		case 0: {
@@ -959,7 +969,7 @@ int main() {
 
 		}
 
-		case 4: {
+		case 3: {
 
 			int id;
 			
