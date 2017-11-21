@@ -5,17 +5,6 @@
 #include <locale.h>
 #include <windows.h>
 
-#define _CRT_SECURE_NO_WARNINGS
-#define _CRT_NONSTDC_NO_DEPRECATE
-#define NO_WARN_MBCS_MFC_DEPRECATION
-
-void flush() {
-
-	char flush[3];
-	gets(flush);
-
-}
-
 struct filme {
 
 	char	title[100];
@@ -26,6 +15,13 @@ struct filme {
 	bool	active;
 
 } cadastros[200];
+
+void flush() {
+
+	char flush[3];
+	gets(flush);
+
+}
 
 int last_id() {
 
@@ -123,14 +119,15 @@ void sleep() {
 void show_title() {
 
 	setlocale(LC_ALL, "Portuguese");
-	system("mode con:cols=61 lines=11");
-	system("COLORS 70");
+	system("mode con:cols=61 lines=12");
+	system("COLOR F0");
 	printf("+----------------------------------------------------------+\n");
 	printf("+                        STRUCT FILMS                      +\n");
 	printf("+----------------------------------------------------------+\n");
 	printf("+                                                          +\n");
 	printf("+    NOME: Vitor Mendes   RA: 8799001598  TURMA: SI - 2    +\n");
 	printf("+    NOME: Yang Leite     RA: 2670923557  TURMA: SI - 1    +\n");
+	printf("+    NOME: Itamar Farias  RA: 2691103083  TURMA: SI - 1    +\n");
 	printf("+                                                          +\n");
 	printf("+----------------------------------------------------------+\n");
 	printf("+                        CARREGANDO...                     +\n");
